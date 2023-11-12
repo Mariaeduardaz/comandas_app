@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+<h1 class="Home">Home</h1>
+<p class="important">Seja bem vindo cliente!</p>
+
+  <ul class="menuLista">
+    <li><a href="{{ url_for('funcionario.formListaFuncionario') }}">Funcionário</a></li>
+    <li><a href="{{ url_for('cliente.formListaCliente') }}">Cliente</a></li>
+    <li><a href="{{ url_for('produto.formListaProduto') }}">Produto</a></li>
+  </ul>
+ 
+{% endblock %}

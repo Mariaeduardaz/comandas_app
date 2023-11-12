@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Cliente{% endblock %}
+{# ajusta as variáveis conforme novo ou edit #}
+{% set id = result[0].id_clinete if result else '0' %}
+{% set nome = result[0].nome if result else '' %}
+{% set comprar_fiado = result[0].comprar_fiado if result else '' %}
+{% set cpf = result[0].cpf if result else '' %}
+{% set telefone = result[0].telefone if result else '' %}
+{% set dia_fiado = result[0].dia_fiado if result else '' %}
+{% set senha = result[0].senha if result else '' %}
+
+{% block content %}
+
+<form name="{{ 'formEditar' if result else 'formAdicionar' }}"
+id="{{ 'formEditar' if result else 'formAdicionar' }}"
+action="{{ url_for('cliente.edit') if result else url_for('cliente.insert') }}"
+method="POST">
+    <h1>Cliente - {{ "%s: %s" % ('Editar Registro', id) if result else 'Novo' }}</h1>
+    <label for="id">Código do cliente</label>
+    <input type="text" name="id" id="id" value="{{ id }}">
+    <label for="nome">Nome Cliente</label>
+    <input type="text" name="nome" id="nome" value="{{ nome }}" >
+    <label for="cpf">CPF</label>
+    <input type="text" name="cpf" id="cpf" value="{{ cpf }}" >
+    <label for="cpf">Telefone</label>
+    <input type="tel" name="telefone" id="telefone" value="{{ telefone }}" >
+    <label for="cpf">Comprar fiado</label>
+    <input type="text" name="comprar_fiado" id="comprar_fiado" value="{{ comprar_fiado }}" >
+    <label for="cpf">Dia fiado</label>
+    <input type="text" name="dia_fiado" id="dia_fiado" value="{{ dia_fiado }}" >
+    <label for="cpf">Senha</label>
+    <input type="password" name="senha" id="senha" value="{{ senha }}">
+    <span id="message"></span>
+    <button type='submit' name='salvaUsuarioDB' id='salvaUsuarioDB'><i class='fas fa-save'></i> Salvar</button>
+
+</form>
+{% endblock %}
+
+{% block style %}
+<style>
+    h1 {
+        text-align: center;
+        font-size: 24px;
+        color: #333;
+    }
+
+    form {
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    select,
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    select {
+        height: 40px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+{% endblock %}
